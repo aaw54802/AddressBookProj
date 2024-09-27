@@ -21,12 +21,21 @@
     <ClCompile Include="dateType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extPersonType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddressType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dateType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extPersonType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

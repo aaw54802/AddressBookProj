@@ -129,10 +129,13 @@
   <ItemGroup>
     <ClCompile Include="AddressBookProj.cpp" />
     <ClCompile Include="dateType.cpp" />
+    <ClCompile Include="extPersonType.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddressType.h" />
     <ClInclude Include="dateType.h" />
+    <ClInclude Include="extPersonType.h" />
+    <ClInclude Include="PersonType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
