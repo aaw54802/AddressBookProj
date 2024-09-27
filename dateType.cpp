@@ -15,44 +15,12 @@ void dateType::setDate(int month, int day, int year)
 	else
 		zMonth = 1;
 
-	switch (zMonth)
-	{
-	case 1:
-	case 3:
-	case 5:
-	case 7:
-	case 8:
-	case 10:
-	case 12:
-		if (1 <= day && day <= 31)
-			zDay = day;
-		else
-			zDay = 1;
-		break;
-	case 4:
-	case 6:
-	case 9:
-	case 11:
-		if (1 <= day && day <= 30)
-			zDay = day;
-		else
-			zDay = 1;
-		break;
-	case 2: if (LeapYear())
-	{
-		if (1 <= day && day <= 29)
-			zDay = day;
-		else
-			zDay = 1;
-	}
-		  else
-	{
-		if (1 <= day && day <= 28)
-			zDay = day;
-		else
-			zDay = 1;
-	}
-	}
+	int maxDays = get_num_days_month(); // Use the centralized logic to determine max days in the month
+
+	if (1 <= day && day <= maxDays)
+		zDay = day;
+	else
+		zDay = 1;
 }
 
 void dateType::print() const
@@ -60,17 +28,17 @@ void dateType::print() const
 	cout << zMonth << "-" << zDay << "-" << zYear;
 }
 
-int dateType::getMonth()  const
+int dateType::getMonth() const
 {
 	return zMonth;
 }
 
-int dateType::getday()  const
+int dateType::getday() const
 {
 	return zDay;
 }
 
-int dateType::getYear()  const
+int dateType::getYear() const
 {
 	return zYear;
 }
@@ -116,7 +84,5 @@ bool dateType::LeapYear()
 
 dateType::dateType(int month, int day, int year)
 {
-	zMonth = month;
-	zDay = day;
-	zYear = year;
+	setDate(month, day, year);
 }
