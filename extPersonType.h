@@ -26,10 +26,18 @@ public:
     // Print function
     void print() const override;
 
+   // Operator Overloads declaration (only declaration here, no definition)
+    bool operator>=(const extPersonType& other) const;
+    bool operator==(const extPersonType& other) const;
+    bool operator!=(const extPersonType& other) const;
+
+
+
 private:
     std::string phoneNumber; // Phone number of the person
     std::string relationship; // Relationship of the person (Family, Friend, Business)
     dateType birthdate; // Date of birth
     AddressType address; // Address of the person
 };
+
 

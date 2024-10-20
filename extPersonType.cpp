@@ -41,3 +41,23 @@ void extPersonType::print() const {
     address.print(); // Call print from addressType
 }
 
+// Operator Overloads
+bool extPersonType::operator>=(const extPersonType& other) const {
+    std::string thisKey = getLastName() + getFirstName();
+    std::string otherKey = other.getLastName() + other.getFirstName();
+    return thisKey >= otherKey;
+}
+
+bool extPersonType::operator==(const extPersonType& other) const {
+    std::string thisKey = getLastName() + getFirstName();
+    std::string otherKey = other.getLastName() + other.getFirstName();
+    return thisKey == otherKey;
+}
+
+
+bool extPersonType::operator!=(const extPersonType& other) const {
+    std::string thisKey = getLastName() + getFirstName();
+    std::string otherKey = other.getLastName() + other.getFirstName();
+    return thisKey != otherKey;  // Compare the keys
+}
+

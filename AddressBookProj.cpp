@@ -1,19 +1,20 @@
 #include <iostream>
 #include "AddressBookType.h"
+#include "orderedLinkedList.h"
+#include "extPersonType.h"
+
 
 using namespace std;
 
-// Function to display the menu
 int showMenu() {
     int choice;
     cout << "On-line Address Book" << endl;
     cout << "Select an option:" << endl;
     cout << "1: Display all entries in the address book." << endl;
-    cout << "2: Display an entry by a persons last name." << endl;
+    cout << "2: Display an entry by a person's name." << endl;
     cout << "3: Display all entries with a given birth month." << endl;
     cout << "4: Display all entries with a given relationship tag (Business, Friend, Family)." << endl;
-    cout << "5: Sort entries by last name." << endl;
-    cout << "6: Quit" << endl;
+    cout << "5: Quit" << endl;
     cout << "Enter your choice: ";
     cin >> choice;
     return choice;
@@ -21,8 +22,7 @@ int showMenu() {
 
 // Main function
 int main() {
-    const int MAX_ENTRIES = 100; // Maximum number of entries
-    AddressBookType addressBook(MAX_ENTRIES); // Create an address book object
+    AddressBookType addressBook;  // Use linked list-based address book
 
     // Initialize entries from the file
     addressBook.initEntry("AddressBookData.txt");
@@ -36,10 +36,12 @@ int main() {
             addressBook.print(); // Display all entries
             break;
         case 2: {
-            string lastName;
+            string lastName, firstName;
             cout << "Enter last name: ";
             cin >> lastName;
-            addressBook.findPerson(lastName); // Find a person by last name
+            cout << "Enter first name: ";
+            cin >> firstName;
+            addressBook.findPerson(lastName, firstName);  // now passing both names
             break;
         }
         case 3: {
@@ -57,17 +59,13 @@ int main() {
             break;
         }
         case 5:
-            addressBook.sortEntries(); // Sort entries by last name
-            cout << "Entries sorted by last name." << endl;
-            break;
-        case 6:
             cout << "Quitting the program." << endl; // Quit the program
             break;
         default:
             cout << "Invalid choice. Please try again." << endl; // Handle invalid input
         }
         cout << endl; // Print an empty line for better readability
-    } while (choice != 6);
+    } while (choice != 5);
 
     return 0; // Return success
 }
