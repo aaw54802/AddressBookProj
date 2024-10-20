@@ -19,6 +19,15 @@ public:
     void findBirthdays(int month) const; // Find birthdays in a given month
     void findRelations(const std::string& relationship) const;; // Find relations by relationship type
     void print() const; // Print all entries
+
+    //NEW
+    void addInteractiveEntry(); // Add a new entry interactively
+    void deleteEntry(const std::string& firstName, const std::string& lastName);  // Delete entry by name
+    void saveToFile(const std::string& filename) const;
+
+private:
+    // Helper function to save a single person to the file
+    void savePersonToFile(std::ofstream& outFile, const extPersonType& person) const;
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 
+
 class extPersonType : public personType {
 public:
     // Constructor
@@ -22,6 +23,22 @@ public:
     std::string getPhoneNumber() const;
     std::string getRelationship() const;
     int getBirthMonth() const;
+
+    // Getters for first and last name
+    std::string getFirstName() const;
+    std::string getLastName() const;
+
+    // Getters for birthdate
+    int getBirthDay() const;  // Returns the day
+    //int getBirthMonth() const; // Returns the month
+    int getBirthYear() const;  // Returns the year
+
+    // Getters for address (inside addressType)
+    std::string getStreet() const;
+    std::string getCity() const;
+    std::string getState() const;
+    int getZipCode() const;
+
 
     // Print function
     void print() const override;

@@ -1,4 +1,6 @@
 #include "AddressBookType.h"
+#include <fstream>
+#include <iostream>
 
 // Constructor
 AddressBookType::AddressBookType() : orderedLinkedList<extPersonType>() {
@@ -91,3 +93,82 @@ void AddressBookType::print() const {
     }
 }
 
+// Function to add a new entry interactively
+void AddressBookType::addInteractiveEntry() {
+    string firstName, lastName, street, city, state, phoneNumber, relationship;
+    int month, day, year, zipCode;
+
+    cout << "Enter first name: ";
+    cin >> firstName;
+    cout << "Enter last name: ";
+    cin >> lastName;
+    cout << "Enter birthdate (month day year): ";
+    cin >> month >> day >> year;
+    cout << "Enter street address: ";
+    cin.ignore(); // to clear the input buffer
+    getline(cin, street);
+    cout << "Enter city: ";
+    getline(cin, city);
+    cout << "Enter state: ";
+    cin >> state;
+    cout << "Enter zip code: ";
+    cin >> zipCode;
+    cout << "Enter phone number: ";
+    cin >> phoneNumber;
+    cout << "Enter relationship (Family, Friend, Business): ";
+    cin >> relationship;
+
+    extPersonType person(firstName, lastName, month, day, year, street, city, state, zipCode, phoneNumber, relationship);
+    addEntry(person);
+    cout << "Entry added successfully!" << endl;
+}
+
+// Function to delete an entry by name
+void AddressBookType::deleteEntry(const string& firstName, const string& lastName) {
+    extPersonType key(firstName, lastName);
+    deleteNode(key);
+    cout << "Entry deleted successfully!" << endl;
+}
+
+void AddressBookType::savePersonToFile(std::ofstream& outFile, const extPersonType& person) const {
+    // Redirect the person's `print` output to the file stream
+    std::streambuf* coutBuf = std::cout.rdbuf();  // Save the original buffer
+    std::cout.rdbuf(outFile.rdbuf());             // Redirect std::cout to outFile
+
+    person.print();  // This prints the person's details to the file
+
+    std::cout.rdbuf(coutBuf);  // Reset to the original buffer
+    outFile << std::endl;      // Add a newline after each entry
+}
+
+void AddressBookType::saveToFile(const std::string& filename) const {
+    std::ofstream outFile(filename, std::ios::trunc);  // Open file for writing, truncating any existing data
+
+    if (!outFile) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return;
+    }
+
+    // Traverse the linked list and save each person's details
+    nodeType<extPersonType>* current = this->first;
+
+    while (current != nullptr) {
+        const extPersonType& person = current->info;
+
+        // Save in the original input format
+        outFile << person.getFirstName() << " " << person.getLastName() << "\n";  // First and Last Name
+        outFile << person.getBirthMonth() << " "
+            << person.getBirthDay() << " "
+            << person.getBirthYear() << "\n"
+            << person.getStreet() << "\n"
+            << person.getCity() << "\n"
+            << person.getState() << "\n"
+            << person.getZipCode() << "\n"
+            << person.getPhoneNumber() << "\n"
+            << person.getRelationship() << "\n";
+
+        current = current->link;  // Move to the next node
+    }
+
+    outFile.close();  // Close the file after writing
+}

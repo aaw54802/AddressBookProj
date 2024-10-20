@@ -1,4 +1,5 @@
 #include "extPersonType.h"
+#include <iostream>
 
 // Constructor implementation
 extPersonType::extPersonType(std::string firstName, std::string lastName,
@@ -29,6 +30,19 @@ void extPersonType::setRelationship(const std::string& relationship) {
 std::string extPersonType::getPhoneNumber() const { return phoneNumber; }
 std::string extPersonType::getRelationship() const { return relationship; }
 int extPersonType::getBirthMonth() const { return birthdate.getMonth(); }
+
+std::string extPersonType::getFirstName() const { return personType::getFirstName(); }
+std::string extPersonType::getLastName() const { return personType::getLastName(); }
+
+// Getter implementations for birthdate
+int extPersonType::getBirthDay() const { return birthdate.getday(); }
+int extPersonType::getBirthYear() const { return birthdate.getYear(); }
+
+// Getter implementations for address
+std::string extPersonType::getStreet() const { return address.getAddress(); }
+std::string extPersonType::getCity() const { return address.getCity(); }
+std::string extPersonType::getState() const { return address.getState(); }
+int extPersonType::getZipCode() const { return address.getZipcode(); }
 
 // Print function
 void extPersonType::print() const {
